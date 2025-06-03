@@ -27,10 +27,10 @@ export default function Home() {
   return (
     <div className="w-full mt-[24px] flex items-center justify-center">
       <div className="flex flex-col w-[90%]">
-        <h1 className="text-center mb-24 text-red-500 text-[16px] md:text-[24px] md:text-green-600">
+        <h1 className="text-center mb-[24px] text-[24px] md:text-[48px] text-green-600">
           Bài Test Kỹ Năng Lập Trình
         </h1>
-        <div className="flex flex-col gap-[12px]">
+        <div className="flex flex-col gap-[12px] mb-12">
           {examList.map(
             ({
               title,
@@ -45,18 +45,20 @@ export default function Home() {
             }) => (
               <div
                 key={id}
-                className="flex flex-col gap-12 border-1 p-[24px] rounded-[12px] border-[#7fffd4]"
+                className="flex flex-col gap-2 md:gap-12 border-1 p-[24px] rounded-[12px] border-[#7fffd4]"
               >
                 <div>
-                  <h2 className="text-2xl font-semibold text-indigo-700 mb-3">
+                  <h2 className="text-[18px] md:text-[32px] font-semibold text-indigo-700 mb-3">
                     {title}
                   </h2>
-                  <p className="text-gray-700 leading-relaxed">{description}</p>
+                  <p className="text-gray-700 leading-[24px] text-[14px] md:text-[18px]">
+                    {description}
+                  </p>
                 </div>
                 <div className="mt-8">
                   <button
                     onClick={() => push(href)}
-                    className="p-[8px] border-0 bg-[#bdbded] text-[14px] rounded-[6px]"
+                    className="p-[8px] border-0 bg-[#bdbded] text-[14px] rounded-[6px] cursor-pointer"
                   >
                     Xem kết quả
                   </button>
