@@ -64,7 +64,7 @@ export default function Home() {
             target="_blank"
             className="text-[blue]"
           >
-            Github: https://github.com/HaiDang0301/xipat_test_fe_developer
+            Link Github
           </a>
         </div>
 

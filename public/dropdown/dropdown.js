@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropdown = document.querySelector(".dropdown-menu");
   const items = dropdown.querySelectorAll(".dropdown-item");
   const label = document.getElementById("selectedLabel");
-
+  let selectedIndex = 0;
   const toggleDropdown = () => {
     dropdown.classList.toggle("show");
     button.setAttribute("aria-expanded", dropdown.classList.contains("show") ? "true" : "false");
-    if (dropdown.classList.contains("show")) items[0].focus();
+    if (dropdown.classList.contains("show")) items[selectedIndex].focus();
   };
 
   const closeDropdown = (event) => {
@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdown.classList.remove("show");
     button.setAttribute("aria-expanded", "false");
     button.focus();
+    selectedIndex = Array.from(items).indexOf(item);
   };
 
   const handleKeyDown = (event) => {
