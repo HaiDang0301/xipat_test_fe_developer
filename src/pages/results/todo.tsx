@@ -1,28 +1,27 @@
 import { AppDispatch, RootState } from "@/store/store";
-import { Button, Checkbox, Input, Radio } from "antd";
-import {
-  addTodo,
-  deleteTodo,
-  editTodo,
-  FilterOptions,
-  setFilter,
-  setTodos,
-  Todo,
-  toggleTodo,
-} from "@/store/todoSlice";
+import { Button } from "antd";
+import { addTodo, editTodo, setTodos, Todo } from "@/store/todoSlice";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import cls from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { BackButton } from "@/components/back";
+import dayjs from "dayjs";
+import { TodoItemCount } from "@/components/ui/todo-item-count";
+import { FilterTodoList } from "@/components/ui/filter-todo-list";
+import { ListTodoItem } from "@/components/ui/list-todo-item";
+import { TodoListForm } from "@/components/ui/todo-list-form";
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
   const todos = useSelector((state: RootState) => state.todo.todos);
-  const filter = useSelector((state: RootState) => state.todo.filter);
+  const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [editId, setEditId] = useState<string | null>(null);
-  const [editText, setEditText] = useState("");
+  const [description, setDescription] = useState("");
+  const [priorityLevel, setPriorityLevel] = useState("medium");
+  const [completed, setCompleted] = useState("false");
+  const [range, setRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -34,125 +33,114 @@ export default function Home() {
       dispatch(setTodos(JSON.parse(saved)));
     }
   }, [dispatch]);
+  const handleSubmit = () => {
+    if (input.trim() && range) {
+      const todoData: Todo = {
+        id: editId ?? Date.now().toString(),
+        text: input.trim(),
+        completed: completed === "true",
+        description,
+        priorityLevel,
+        startAt: range[0].toDate(),
+        endAt: range[1].toDate(),
+      };
 
-  const filteredTodos = todos.filter((todo: Todo) => {
-    if (filter === FilterOptions.ALL) return true;
-    if (filter === FilterOptions.COMPLETED) return todo.completed;
-    if (filter === FilterOptions.PENDING) return !todo.completed;
-    return true;
-  });
+      if (editId) {
+        dispatch(editTodo(todoData));
+      } else {
+        dispatch(addTodo(todoData));
+      }
 
-  const handleAdd = () => {
-    if (input.trim()) {
-      dispatch(addTodo(input.trim()));
       setInput("");
-    }
-  };
-
-  const startEdit = (id: string, text: string) => {
-    setEditId(id);
-    setEditText(text);
-  };
-
-  const saveEdit = () => {
-    if (editId && editText.trim()) {
-      dispatch(editTodo({ id: editId, text: editText.trim() }));
+      setDescription("");
+      setPriorityLevel("medium");
+      setCompleted("false");
+      setRange(null);
       setEditId(null);
-      setEditText("");
+      setOpen(false);
     }
   };
+  const totalCount = todos.length;
+  const completedCount = todos.filter((t) => t.completed).length;
+  const pendingCount = todos.filter((t) => !t.completed).length;
+
   return (
-    <div className="flex items-center justify-center mt-24">
-      <div className="w-[90%] md:w-2/4 flex flex-col items-center gap-4 shadow-lg rounded-xl bg-white p-8">
+    <div className="flex items-center justify-center my-24">
+      <div className="w-[90%] lg:w-2/4 flex flex-col items-center gap-4 shadow-lg rounded-xl bg-indigo-100 p-8">
         <BackButton />
-        <h1 className="text-[32px] font-bold">Todo List</h1>
-        <div className="w-full flex gap-4">
-          <Input
-            placeholder="Nhập việc cần làm ..."
-            className={styles.inputTodo}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <Button type="primary" className={styles.btnAdd} onClick={handleAdd}>
-            Thêm
-          </Button>
+        <div className="text-center mb-1">
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">
+            📝 Danh Sách Công Việc
+          </h1>
+          <p className="text-gray-600">Quản lý công việc hàng ngày của bạn</p>
         </div>
-        <div className="mb-4 flex justify-center w-full">
-          <Radio.Group
-            block
-            options={[
-              { label: "Tất cả", value: FilterOptions.ALL },
-              { label: "Đã hoàn thành", value: FilterOptions.COMPLETED },
-              { label: "Đang chờ xử lý", value: FilterOptions.PENDING },
-            ]}
-            defaultValue="all"
-            optionType="button"
-            buttonStyle="solid"
-            onChange={(e) => dispatch(setFilter(e.target.value))}
-            className={cls("flex gap-12", styles.filter)}
+        <div className="w-full flex gap-4 shadow-lg p-[24px] bg-white">
+          <Button
+            className={cls(styles.btnAdd, "w-full")}
+            onClick={() => {
+              setEditId(null);
+              setInput("");
+              setDescription("");
+              setPriorityLevel("medium");
+              setCompleted("false");
+              setRange(null);
+              setOpen(true);
+            }}
+          >
+            + Thêm Công Việc Mới
+          </Button>
+          <TodoListForm
+            {...{
+              editId,
+              open,
+              handleSubmit,
+              setEditId,
+              setOpen,
+              input,
+              setInput,
+              description,
+              setDescription,
+              priorityLevel,
+              setPriorityLevel,
+              completed,
+              setCompleted,
+              range,
+              setRange,
+            }}
           />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+          <TodoItemCount
+            number={totalCount}
+            completed="Tổng công việc"
+            color="black"
+          />
+          <TodoItemCount
+            number={completedCount}
+            completed="Đã hoàn thành"
+            color="green"
+          />
+          <TodoItemCount
+            number={pendingCount}
+            completed="Đang chờ xử lý"
+            color="orange"
+          />
+        </div>
+        <div className="mb-4 flex justify-center w-full bg-white py-[24px] shadow-2xl">
+          <FilterTodoList />
         </div>
         <ul className="w-[100%]">
-          {filteredTodos.map((todo) => (
-            <li key={todo.id} className="flex items-center w-full mb-12">
-              <Checkbox
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => dispatch(toggleTodo(todo.id))}
-              />
-              {editId === todo.id ? (
-                <div className="w-full justify-between flex gap-[12px]">
-                  <div className="ml-[12px] w-full">
-                    <Input
-                      value={editText}
-                      onChange={(e) => setEditText(e.target.value)}
-                      className="flex-grow border border-gray-300 rounded px-2 py-1 w-full"
-                    />
-                  </div>
-                  <div className="flex gap-4">
-                    <div
-                      onClick={saveEdit}
-                      className="text-green-600 hover:text-green-800 cursor-pointer"
-                    >
-                      Lưu
-                    </div>
-                    <div
-                      onClick={() => setEditId(null)}
-                      className="text-red-600 hover:text-red-800 cursor-pointer"
-                    >
-                      Hủy
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex w-full items-center justify-between gap-[12px]">
-                  <p
-                    className={cls("ml-[12px] max-w-[85%]", {
-                      "line-through text-gray-400": todo.completed,
-                    })}
-                  >
-                    {todo.text}
-                  </p>
-                  <div className="flex gap-4">
-                    <div
-                      onClick={() => startEdit(todo.id, todo.text)}
-                      className="text-blue-600 hover:text-blue-800 cursor-pointer"
-                    >
-                      Sửa
-                    </div>
-                    <div
-                      onClick={() => dispatch(deleteTodo(todo.id))}
-                      className="text-red-600 hover:text-red-800 border-0 cursor-pointer"
-                    >
-                      Xóa
-                    </div>
-                  </div>
-                </div>
-              )}
-            </li>
-          ))}
+          <ListTodoItem
+            {...{
+              setOpen,
+              setInput,
+              setEditId,
+              setDescription,
+              setPriorityLevel,
+              setRange,
+            }}
+          />
         </ul>
-        {!filteredTodos.length && <div>Không có công việc nào.</div>}
       </div>
     </div>
   );

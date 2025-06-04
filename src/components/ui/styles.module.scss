@@ -1,0 +1,33 @@
+.filter {
+  gap: 6px;
+  min-width: 100%;
+  text-align: center;
+  flex-direction: column;
+  font-size: 600;
+  padding: 0px 14px !important;
+  @media (min-width:640px) {
+    flex-direction: row;
+    height: 40px;
+  }
+  @media (min-width: 768px) {
+    min-width: 80%;
+    min-height: 42px;
+  }
+    :global(.ant-radio-button-wrapper) {
+      width: 100% !important;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0px !important;
+  }
+  :global(.ant-radio-button-checked){
+    background-color: black !important;
+    border: none !important;
+  }
+}
+.numberTodo{
+  height: 24px !important;
+  border-radius: 99px;
+  padding: 0px 24px;
+}
