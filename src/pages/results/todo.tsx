@@ -9,7 +9,7 @@ import { BackButton } from "@/components/back";
 import dayjs from "dayjs";
 import { TodoItemCount } from "@/components/ui/todo-item-count";
 import { FilterTodoList } from "@/components/ui/filter-todo-list";
-import { ListTodoItem } from "@/components/ui/list-todo-item";
+import { ListTodoItem, PriorityLevel } from "@/components/ui/list-todo-item";
 import { TodoListForm } from "@/components/ui/todo-list-form";
 
 export default function Home() {
@@ -24,7 +24,9 @@ export default function Home() {
   const [range, setRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
+    if (todos.length > 0) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
   }, [todos]);
 
   useEffect(() => {
@@ -53,7 +55,7 @@ export default function Home() {
 
       setInput("");
       setDescription("");
-      setPriorityLevel("medium");
+      setPriorityLevel(PriorityLevel.MEDIUM);
       setCompleted("false");
       setRange(null);
       setEditId(null);
@@ -81,7 +83,7 @@ export default function Home() {
               setEditId(null);
               setInput("");
               setDescription("");
-              setPriorityLevel("medium");
+              setPriorityLevel(PriorityLevel.MEDIUM);
               setCompleted("false");
               setRange(null);
               setOpen(true);

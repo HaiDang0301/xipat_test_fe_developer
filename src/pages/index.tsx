@@ -34,7 +34,7 @@ const examList = [
   {
     id: 3,
     title: "Bài 3: Dropdown JS",
-    href: "/results/dropdown",
+    href: "/dropdown/dropdown.html",
     description: "Menu thả xuống tùy chỉnh bằng Vanilla JavaScript",
     tags: ["JavaScript", "DOM", "CSS", "Vanilla JS"],
     color: "orange",
@@ -58,7 +58,14 @@ export default function Home() {
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
             Bài Test Kỹ Năng Lập Trình
           </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto rounded-full mb-3" />
+          <a
+            href="https://github.com/HaiDang0301/xipat_test_fe_developer"
+            target="_blank"
+            className="text-[blue]"
+          >
+            Github: https://github.com/HaiDang0301/xipat_test_fe_developer
+          </a>
         </div>
 
         <div className="grid gap-8">
