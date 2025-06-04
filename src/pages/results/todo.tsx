@@ -1,6 +1,4 @@
-import { useRouter } from "next/router";
 import { AppDispatch, RootState } from "@/store/store";
-import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Input, Radio } from "antd";
 import {
   addTodo,
@@ -9,15 +7,16 @@ import {
   FilterOptions,
   setFilter,
   setTodos,
+  Todo,
   toggleTodo,
 } from "@/store/todoSlice";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import styles from "./styles.module.scss";
 import cls from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import { BackButton } from "@/components/back";
 
 export default function Home() {
-  const { back } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const todos = useSelector((state: RootState) => state.todo.todos);
   const filter = useSelector((state: RootState) => state.todo.filter);
@@ -36,7 +35,7 @@ export default function Home() {
     }
   }, [dispatch]);
 
-  const filteredTodos = todos.filter((todo) => {
+  const filteredTodos = todos.filter((todo: Todo) => {
     if (filter === FilterOptions.ALL) return true;
     if (filter === FilterOptions.COMPLETED) return todo.completed;
     if (filter === FilterOptions.PENDING) return !todo.completed;
@@ -65,14 +64,7 @@ export default function Home() {
   return (
     <div className="flex items-center justify-center mt-24">
       <div className="w-[90%] md:w-2/4 flex flex-col items-center gap-4 shadow-lg rounded-xl bg-white p-8">
-        <div
-          className="text-left w-full flex items-center gap-2 cursor-pointer text-blue-600 hover:text-blue-800"
-          onClick={back}
-        >
-          <ArrowLeftOutlined />
-          <span>Quay Lại</span>
-        </div>
-
+        <BackButton />
         <h1 className="text-[32px] font-bold">Todo List</h1>
         <div className="w-full flex gap-4">
           <Input

@@ -16,6 +16,7 @@
     "antd": "^5.25.4",
     "classnames": "^2.5.1",
     "next": "15.3.3",
+    "rc-picker": "4.8.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
