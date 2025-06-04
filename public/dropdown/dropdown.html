@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu thả xuống tùy chỉnh</title>
+  <link rel="stylesheet" href="dropdown.css" />
+  <script src="dropdown.js"></script>
+</head>
+<body>
+  <div class="dropdown-container">
+    <h1>Menu thả xuống tùy chỉnh</h1>
+    <div class="dropdown">
+      <button class="dropdown-button" aria-haspopup="true" aria-expanded="false">
+        Click để chọn
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" class="dropdown-item" role="menuitem" tabindex="0">Tùy chọn 1</a></li>
+        <li><a href="#" class="dropdown-item" role="menuitem" tabindex="0">Tùy chọn 2</a></li>
+        <li><a href="#" class="dropdown-item" role="menuitem" tabindex="0">Tùy chọn 3</a></li>
+      </ul>
+    </div>
+    <div class="selected-label" id="selectedLabel">Bạn đã chọn: <i>Chưa có</i></div>
+  </div>
+</body>
+</html>

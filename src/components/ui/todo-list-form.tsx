@@ -119,13 +119,13 @@ export const TodoListForm = ({
           <div className="flex-1">
             <FormLabel text="Mức độ ưu tiên" />
             <Select
-              defaultValue="medium"
+              defaultValue={PriorityLevel.MEDIUM}
               className="w-full"
               value={priorityLevel}
               onChange={(value) => setPriorityLevel(value)}
               options={[
                 {
-                  value: "medium",
+                  value: PriorityLevel.MEDIUM,
                   label: (
                     <>{getPriorityIcon(PriorityLevel.MEDIUM)} Trung bình</>
                   ),
