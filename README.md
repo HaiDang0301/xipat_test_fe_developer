@@ -1,10 +1,15 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+This is a Next.js project created with create-next-app. It demonstrates essential front-end skills using technologies such as React, Redux Toolkit, Ant Design, and TailwindCSS.
 
-## Getting Started
+🚀 Getting Started
 
-First, run the development server:
+✅ Prerequisites
 
-```bash
+Node.js: ^22.x (as specified in package.json)
+
+Package Manager: npm, yarn, pnpm, or bun
+
+To run the development server:
+
 npm run dev
 # or
 yarn dev
@@ -12,29 +17,63 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000 in your browser to view the application.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+🧠 Project Structure
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+pages/ – Main application pages and routing.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+components/ – Reusable UI components.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+styles/ – Global styles.
 
-## Learn More
+store/ – Redux Toolkit store setup.
 
-To learn more about Next.js, take a look at the following resources:
+public/ – Static assets.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+🧪 Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+npm run dev – Start development server with Turbopack.
 
-## Deploy on Vercel
+npm run build – Create an optimized production build.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+npm run start – Start the production server.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+npm run lint – Run ESLint for code quality.
+
+🧰 Technologies Used
+
+React 19 – UI Library
+
+Next.js 15 – Full-stack React Framework
+
+Redux Toolkit – State Management
+
+Ant Design 5 – UI Component Library
+
+Tailwind CSS 4 – Utility-first CSS
+
+Sass – CSS preprocessor
+
+Day.js – Lightweight date library
+
+TypeScript – Static type checking
+
+ESLint – Linting and code style enforcement
+
+📦 Deployment
+
+Deploy easily on Vercel – the creators of Next.js:
+
+👉 Deploy on Vercel
+
+📚 Learn More
+
+Next.js Documentation
+
+Interactive Tutorial
+
+Next.js GitHub Repository
+
+Feel free to contribute, test, and explore this boilerplate as a solid foundation for modern web development.

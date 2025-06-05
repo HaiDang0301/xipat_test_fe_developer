@@ -30,4 +30,8 @@
   height: 24px !important;
   border-radius: 99px;
   padding: 0px 24px;
+  display: none;
+  @media (min-width:640px) {
+    display: block;
+  }
 }

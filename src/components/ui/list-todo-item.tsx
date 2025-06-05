@@ -105,7 +105,11 @@ export const ListTodoItem = ({
                     {todo.completed ? "Hoàn thành" : "Đang chờ xử lý"}
                   </Tag>
                 </div>
-                <p className="text-[14px]">Mô tả: {todo.description}</p>
+                <p
+                  className={cls("text-[14px]", { hidden: !todo.description })}
+                >
+                  Mô tả: {todo.description}
+                </p>
                 <div className="flex flex-col md:flex-row gap-2 text-[14px]">
                   <p>Bắt đầu: {dayjs(todo.startAt).format("DD/MM/YYYY")}</p>
                   <p>Kết thúc: {dayjs(todo.endAt).format("DD/MM/YYYY")}</p>
