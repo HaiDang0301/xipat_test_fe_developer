@@ -21,6 +21,7 @@ interface ListTodoItemProps {
   setEditId: (id: string | null) => void;
   setDescription: (description: string) => void;
   setPriorityLevel: (priority: PriorityLevel) => void;
+  setCompleted: (completed: boolean) => void;
   setRange: (range: [Dayjs, Dayjs] | null) => void;
 }
 
@@ -36,6 +37,7 @@ export const ListTodoItem = ({
   setEditId,
   setDescription,
   setPriorityLevel,
+  setCompleted,
   setRange,
 }: ListTodoItemProps) => {
   const todos = useSelector((state: RootState) => state.todo.todos);
@@ -54,6 +56,7 @@ export const ListTodoItem = ({
     setDescription(todo.description);
     setPriorityLevel(todo.priorityLevel as PriorityLevel);
     setRange([dayjs(todo.startAt), dayjs(todo.endAt)]);
+    setCompleted(todo.completed);
     setOpen(true);
   };
 

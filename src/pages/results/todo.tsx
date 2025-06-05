@@ -20,7 +20,7 @@ export default function Home() {
   const [editId, setEditId] = useState<string | null>(null);
   const [description, setDescription] = useState("");
   const [priorityLevel, setPriorityLevel] = useState("medium");
-  const [completed, setCompleted] = useState("false");
+  const [completed, setCompleted] = useState(false);
   const [range, setRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function Home() {
       const todoData: Todo = {
         id: editId ?? Date.now().toString(),
         text: input.trim(),
-        completed: completed === "true",
+        completed: completed,
         description,
         priorityLevel,
         startAt: range[0].toDate(),
@@ -56,7 +56,7 @@ export default function Home() {
       setInput("");
       setDescription("");
       setPriorityLevel(PriorityLevel.MEDIUM);
-      setCompleted("false");
+      setCompleted(false);
       setRange(null);
       setEditId(null);
       setOpen(false);
@@ -84,7 +84,7 @@ export default function Home() {
               setInput("");
               setDescription("");
               setPriorityLevel(PriorityLevel.MEDIUM);
-              setCompleted("false");
+              setCompleted(false);
               setRange(null);
               setOpen(true);
             }}
@@ -139,6 +139,7 @@ export default function Home() {
               setEditId,
               setDescription,
               setPriorityLevel,
+              setCompleted,
               setRange,
             }}
           />
