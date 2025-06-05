@@ -21,8 +21,8 @@ interface TodoListFormProps {
   setDescription: (description: string) => void;
   priorityLevel: string;
   setPriorityLevel: (priority: string) => void;
-  completed: string;
-  setCompleted: (status: string) => void;
+  completed: boolean;
+  setCompleted: (completed: boolean) => void;
   range: [Dayjs, Dayjs] | null;
   setRange: (range: [Dayjs, Dayjs] | null) => void;
 }
@@ -144,13 +144,13 @@ export const TodoListForm = ({
           <div className="flex-1">
             <FormLabel text="Trạng thái" />
             <Select
-              defaultValue="pending"
+              defaultValue={false}
               className="w-full"
               value={completed}
               onChange={(value) => setCompleted(value)}
               options={[
                 {
-                  value: "false",
+                  value: false,
                   label: (
                     <>
                       <ClockCircleOutlined /> Đang chờ xử lý
@@ -158,7 +158,7 @@ export const TodoListForm = ({
                   ),
                 },
                 {
-                  value: "true",
+                  value: true,
                   label: (
                     <>
                       <CheckCircleOutlined /> Hoàn thành
